@@ -1,0 +1,44 @@
+<%- contentFor('body') %>
+
+<div class="row">
+    <div class="col-sm">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Quantidade total de filmes</div>
+            <div class="card-body">
+              <h5 class="card-title card-dashboard-font"><%= length_movies %></h5>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Duração total</div>
+            <div class="card-body">
+              <h5 class="card-title card-dashboard-font"><%= sum_time %></h5>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < movies.length; i++) { %>
+                <tr>
+                    <td><%= movies[i].name %></td>
+                    <td><%= movies[i].duration %></td>
+                    <td><%= movies[i].type %></td>
+                </tr>
+                <% } %>
+
+            </tbody>
+        </table>
+    </div>
+</div>

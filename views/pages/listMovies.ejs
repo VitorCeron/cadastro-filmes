@@ -1,0 +1,56 @@
+<%- contentFor('body') %>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Lista de Filmes</li>
+    </ol>
+</nav>
+
+<% if (message && message === true) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Sucesso!</strong> Filme cadastrado com sucesso.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>
+
+<div class="row">
+    <div class="col-sm">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col" class="text-align-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < movies.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= i + 1 %></th>
+                    <td><%= movies[i].name %></td>
+                    <td><%= movies[i].duration %></td>
+                    <td><%= movies[i].type %></td>
+                    <td class="text-align-center">
+                        <a class="btn btn-sm btn-outline-info rounded-pill" href="/updateMovie/<%= movies[i]._id %>"
+                            role="button">Editar</a>
+                        <a class="btn btn-sm btn-outline-danger rounded-pill" onclick="confirmation('Excluir registro?','/deleteMovie/<%= movies[i]._id %>')" href="#" role="button">Excluir</a>
+                    </td>
+                </tr>
+                <% } %>
+
+            </tbody>
+        </table>
+
+        <script>
+          function confirmation(msg, url) {
+            if(confirm(msg)) {
+              window.location.href = url;
+            }else{ false; }
+          }
+          </script>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+version: '3'
+
+services: 
+    nginx: 
+        build: 
+            dockerfile: ./docker/nginx.dockerfile
+            context: .
+        image: vitorceron/nginx
+        container_name: cadastrofilmes-nginx
+        ports: 
+            - "80:80"
+        networks: 
+            - production-network
+        depends_on: 
+            - "node1"
+            - "node2"
+            - "node3"
+
+    mongodb:
+        image: mongo
+        networks: 
+            - production-network
+
+    node1:
+        build: 
+            dockerfile: ./docker/cadastrofilmes.dockerfile
+            context: .
+        image: vitorceron/cadastrofilmes
+        container_name: cadastrofilmes1
+        ports: 
+            - "3000"
+        networks: 
+            - production-network
+        volumes:
+            - .:/usr/app
+        depends_on: 
+            - "mongodb"
+
+    node2:
+        build: 
+            dockerfile: ./docker/cadastrofilmes.dockerfile
+            context: .
+        image: vitorceron/cadastrofilmes
+        container_name: cadastrofilmes2
+        ports: 
+            - "3000"
+        networks: 
+            - production-network
+        volumes:
+            - .:/usr/app
+        depends_on: 
+            - "mongodb"
+
+    node3:
+        build: 
+            dockerfile: ./docker/cadastrofilmes.dockerfile
+            context: .
+        image: vitorceron/cadastrofilmes
+        container_name: cadastrofilmes3
+        ports: 
+            - "3000"
+        networks: 
+            - production-network
+        volumes:
+            - .:/usr/app
+        depends_on: 
+            - "mongodb"
+
+networks: 
+    production-network:
+        driver: bridge

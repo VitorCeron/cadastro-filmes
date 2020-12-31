@@ -1,0 +1,28 @@
+<%- contentFor('body') %>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Cadastrar Filme</li>
+    </ol>
+</nav>
+
+<form action="/insertMovie" method="POST">
+    <div class="form-group">
+        <label for="name">Nome do filme</label>
+        <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <div class="form-group">
+        <label for="duration">Duração</label>
+        <input type="time" class="form-control" id="duration" name="duration">
+    </div>
+    <div class="form-group">
+        <label for="type">Gênero</label>
+        <select class="custom-select" id="type" name="type">
+            <option selected> Drama</option>
+            <option>Comédia</option>
+            <option>Terror</option>
+        </select>
+    </div>
+    <button type="reset" class="btn btn-outline-warning rounded-pill">Limpar</button>
+    <button type="submit" class="btn btn-outline-primary rounded-pill">Salvar</button>
+</form>
